@@ -7,7 +7,7 @@ def getId():
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Connect the socket to the port where the server is listening
-    server_address = ('localhost', 10000)
+    server_address = ('192.168.0.138', 10000)
     print('connecting to %s port %s' % server_address, file=sys.stderr)
 
     try:

@@ -15,7 +15,7 @@ def main():
     thread1.start()
 
     # Bind the socket to the port
-    server_address = ('localhost', 10000)
+    server_address = ('192.168.0.138', 10000)
     print('starting up on %s port %s' % server_address, file=sys.stderr)
     sock.bind(server_address)
 

@@ -14,7 +14,7 @@ class UDPListener(threading.Thread):
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
         # Bind the socket to the port
-        server_address = ('localhost', 10001)
+        server_address = ('192.168.0.138', 10001)
         print('starting up on %s port %s' % server_address, file=sys.stderr)
         sock.bind(server_address)
         while True:

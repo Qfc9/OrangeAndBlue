@@ -22,13 +22,12 @@ class ImAlive(threading.Thread):
         self.cpu = platform.machine()
         self.cpuCount = multiprocessing.cpu_count()
         self.memTotal = mem.total
-        # self.gpu = tf.compat.v1.test.is_gpu_available()
-        self.gpu = ""
+        self.gpu = tf.compat.v1.test.is_gpu_available()
         self.gpuType = ""
 
-        # if self.gpu:
-        #     devices = device_lib.list_local_devices()
-        #     self.gpuType = devices[1].physical_device_desc
+        if self.gpu:
+            devices = device_lib.list_local_devices()
+            self.gpuType = devices[1].physical_device_desc
 
     def run(self):
         while True:
@@ -37,7 +36,7 @@ class ImAlive(threading.Thread):
             sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
             # Connect the socket to the port where the server is listening
-            server_address = ('localhost', 10001)
+            server_address = ('192.168.0.138', 10001)
             print('connecting to %s port %s' % server_address, file=sys.stderr)
 
             try:
