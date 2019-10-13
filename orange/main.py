@@ -1,8 +1,13 @@
 import socket
 import sys
 import udpListener
+import pickle
+import traceback
 
 def main():
+    id = 100
+    print("Loaded Orange")
+
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -26,16 +31,16 @@ def main():
             print('connection from', client_address, file=sys.stderr)
 
             # Receive the data in small chunks and retransmit it
-            while True:
-                data = connection.recv(16)
-                print('received "%s"' % data, file=sys.stderr)
-                if data:
-                    print('sending data back to the client', file=sys.stderr)
-                    connection.sendall(data)
-                else:
-                    print('no more data from', client_address, file=sys.stderr)
-                    break
+            head = connection.recv(2000)
+            head = pickle.loads(head)
+            print('received "%s"' % head, file=sys.stderr)
 
+            if head["type"] == 1:
+                connection.send(pickle.dumps((id)))
+                id += 1
+        except Exception as e:
+            # print(e)
+            traceback.print_exc()
         finally:
             # Clean up the connection
             connection.close()
