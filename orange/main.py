@@ -1,9 +1,13 @@
 import socket
 import sys
+import udpListener
 
 def main():
     # Create a TCP/IP socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    thread1 = udpListener.UDPListener()
+    thread1.start()
 
     # Bind the socket to the port
     server_address = ('localhost', 10000)
