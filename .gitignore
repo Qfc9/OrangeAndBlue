@@ -1,2 +1,11 @@
 *.pyc
 dask-worker-space
+__pycache__
+certs
+old
+build
+dist
+*.exe
+.vscode
+make_certs.txt
+.gitignore

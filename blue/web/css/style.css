@@ -1,0 +1,24 @@
+@import 'css/bootstrap.min.css';
+
+.title-blue{
+    color:#0d6efd;
+}
+
+.left-col{
+    background:#fbfbfb;
+    height: 100%;
+}
+
+.form-switch .form-check-input{
+    width: 5em;
+    height: 1.7em;
+}
+
+.on-off-switch{
+    margin: 2em;
+}
+
+.on-off-switch label{
+    margin-top: 5px;
+    margin-left: 1.2em;
+}

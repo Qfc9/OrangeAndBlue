@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>QR Code Generator</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="/eel.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    
+</head>
+pyinstaller.exe --add-data "C:\Users\elija_000\AppData\Local\Programs\Python\Python36\Lib\site-packages\dask\dask.yaml;./dask" --add-data "C:\Users\elija_000\AppData\Local\Programs\Python\Python36\Lib\site-packages\distributed\distributed.yaml;./distributed" -p "C:\Users\elija_000\AppData\Local\Programs\Python\Python36\Lib\site-packages" .\worker.py
+<body>
+    <main>
+        <div class="row">
+            <div class="col-sm left-col ps-5">
+                <div class="py-5 px-3 pb-0">
+                    <h1 class="title-blue">Blue Eel</h1>
+                </div>
+          
+                <div class="form-check form-switch on-off-switch">
+                    <input class="form-check-input" type="checkbox" onclick="sendIt()" id="flexSwitchCheckDefault">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Off</label>
+                </div>
+
+                <select class="form-select" aria-label="Default select example">
+                    <option selected value="1">Default Project</option>
+                </select>
+            </div>
+            <div class="col-md">
+                <label for="customRange2" class="form-label">Example range</label>
+                <input type="range" class="form-range" min="0" max="5" id="customRange2">
+            </div>
+        </div>
+    </main>
+</body>
+</html>
