@@ -1,3 +1,5 @@
+.vscode
+*.json
 *.pyc
 dask-worker-space
 __pycache__
@@ -6,6 +8,5 @@ old
 build
 dist
 *.exe
-.vscode
 make_certs.txt
 .gitignore

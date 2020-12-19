@@ -5,9 +5,13 @@ import io
 from base64 import b64encode
 import eel
 import subprocess
+import multiprocessing
+import psutil
 from multiprocessing import Process
 
 eel.init('web')
+
+test = 1
 
 def spawn():
     print("start of sub")
@@ -20,6 +24,9 @@ def sendit():
     p = Process(target=spawn, daemon=True)
     p.run()
     return 0
+
+eel.update_cpu(os.cpu_count())
+eel.update_ram(((psutil.virtual_memory().total/1024)/1024)/1024)
 
 # @eel.expose
 # def dummy(dummy_param):
@@ -40,7 +47,7 @@ def sendit():
 # eel.start('index.html', size=(1000, 600))
 # Launching Edge can also be gracefully handled as a fall back
 try:
-    eel.start('index.html', mode='chrome-app', size=(1000, 600))
+    eel.start('index.html', size=(1000, 600))
 except EnvironmentError:
     # If Chrome isn't found, fallback to Microsoft Edge on Win10 or greater
     if sys.platform in ['win32', 'win64'] and int(platform.release()) >= 10:
