@@ -8,25 +8,40 @@ myToastEl.addEventListener('hidden.bs.toast', function () {
 	$('#myToast').remove();
 })
 
-eel.expose(update_cpu)
-eel.expose(update_ram)
-function update_cpu(cpu_count){
-	$('#cpu').text(cpu_count)
+cpu_slider(1);
+ram_slider(1);
+
+eel.expose(start_up)
+
+
+function start_up(cpu_count, ram_count){
+
+	$("#cpu-slider").attr({
+		"max" : cpu_count,
+		"min" : 1,
+		"value": 1
+	 });
+
+	 $("#ram-slider").attr({
+		"max" : ram_count,
+		"min" : 1,
+		"value": 1
+	 });
 }
 
-function update_ram(ram_count){
-	$('#ram').text(ram_count)
+
+function cpu_slider(count){
+	$('#cpu').text("CPU: " + count)
 }
 
-// $('.toast').toast.show();
-// toast.show();
+function ram_slider(count){
+	$('#ram').text("RAM: " + count + "gb")
+}
 
 function sendIt() {
-	// var data = document.getElementById("data").value
-	// eel.generate_qr(data)(setImage)
-	eel.sendit()
-}
-
-function setImage(base64) {
-	document.getElementById("qr").src = base64
+	cpu = $('#cpu-slider').val()
+	ram = $('#ram-slider').val()
+	server = $('#server').val()
+	// console.log(cpu, ram, server);
+	eel.sendit(cpu, ram, server)
 }

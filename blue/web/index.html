@@ -21,31 +21,36 @@
     </toast>
 
     <main>
-        <div class="row">
+        <div class="row h-100">
 
-            <div class="col-sm left-col ps-5">
-                <div class="py-5 px-3 pb-0">
-                    <h1 class="title-blue">Blue Eel</h1>
+            <div class="col-sm-3 left-col">
+                <div class="py-5 pb-0">
+                    <h1 class="title-blue text-center">Blue Eel</h1>
                 </div>
           
                 <div class="form-check form-switch on-off-switch">
                     <input class="form-check-input" type="checkbox" onclick="sendIt()" id="flexSwitchCheckDefault">
-                    <label class="form-check-label" for="flexSwitchCheckDefault">Off</label>
                 </div>
 
-                <select class="form-select" aria-label="Default select example">
-                    <option selected value="1">Default Project</option>
+                <select id="server" class="form-select select-server" aria-label="Default select example">
+                    <option selected value="68.134.200.225">Test Botnet Server</option>
                 </select>
             </div>
 
-            <div class="col-md">
-                <label id="cpu" for="customRange2" class="form-label">CPU</label>
-                <input type="range" class="form-range" min="0" max="5" id="customRange2">
-            </div>
+            <div class="col-sm-8 right-col">
+                <div class="row">
+                    <div class="col-sm pt-5 p-4">
+                        <label id="cpu" for="customRange2" class="form-label fs-3"></label>
+                        <input id="cpu-slider" type="range" class="form-range" min="1" max="5" value="1" oninput="cpu_slider(this.value)">
+                    </div>
+                </div>
 
-            <div class="col-md">
-                <label id="ram" for="customRange2" class="form-label">RAM</label>
-                <input type="range" class="form-range" min="0" max="5" id="customRange2">
+                <div class="row">
+                    <div class="col-sm p-4">
+                        <label id="ram" for="customRange2" class="form-label fs-3"></label>
+                        <input id="ram-slider" type="range" class="form-range" min="1" max="5" value="1" oninput="ram_slider(this.value)">
+                    </div>
+                </div>
             </div>
 
         </div>

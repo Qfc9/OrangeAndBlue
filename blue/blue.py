@@ -8,47 +8,46 @@ import subprocess
 import multiprocessing
 import psutil
 from multiprocessing import Process
+import math
 
 eel.init('web')
 
 test = 1
 
-def spawn():
+def spawn(cpu, ram, server):
     print("start of sub")
-    subprocess.run("dask-worker.exe 192.168.1.151:8786")
+
+    if(cpu.isdigit()):
+        procs = math.ceil(int(cpu)/4)
+        threads = math.ceil(int(cpu)/procs)
+        # memory = math.floor(ram/cpu) don't know if limiting the memory per process is needed
+
+        procs = str(procs)
+        threads = str(threads)
+    else:
+        # TODO return logic
+        return 0
+
+    subprocess.run("dask-worker.exe --tls-ca-file certs/myCA.pem --tls-cert certs/worker.crt "+
+                   "--tls-key certs/worker.key --protocol tls --nprocs "+procs+" "+
+                   "--nthreads "+threads+" --memory-limit "+ram+"GB tls://"+server+":8786")
     print("end of sub")
 
 @eel.expose
-def sendit():
+def sendit(cpu, ram, server):
     print("SEND IT")
-    p = Process(target=spawn, daemon=True)
+    print(cpu, ram, server)
+    p = Process(target=spawn, args=(cpu, ram, server), daemon=True)
     p.run()
     return 0
 
-eel.update_cpu(os.cpu_count())
-eel.update_ram(((psutil.virtual_memory().total/1024)/1024)/1024)
+eel.start_up(os.cpu_count(), round(((psutil.virtual_memory().total/1024)/1024)/1024))
 
-# @eel.expose
-# def dummy(dummy_param):
-#     print("I got a parameter: ", dummy_param)
-#     return "string_value", 1, 1.2, True, [1, 2, 3, 4], {"name": "eel"}
-
-
-# @eel.expose
-# def generate_qr(data):
-#     img = pyqrcode.create(data)
-#     buffers = io.BytesIO()
-#     img.png(buffers, scale=8)
-#     encoded = b64encode(buffers.getvalue()).decode("ascii")
-#     print("QR code generation successful.")
-#     return "data:image/png;base64, " + encoded
-
-
-# eel.start('index.html', size=(1000, 600))
-# Launching Edge can also be gracefully handled as a fall back
 try:
     eel.start('index.html', size=(1000, 600))
+
 except EnvironmentError:
+    print("aaa")
     # If Chrome isn't found, fallback to Microsoft Edge on Win10 or greater
     if sys.platform in ['win32', 'win64'] and int(platform.release()) >= 10:
         eel.start('index.html', mode='edge', size=(1000, 600))
