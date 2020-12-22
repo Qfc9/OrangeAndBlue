@@ -1,0 +1,56 @@
+@import 'css/bootstrap.min.css';
+
+.title-blue{
+    color:#0d6efd;
+}
+
+.left-col{
+    background:#fbfbfb;
+    height: 100%;
+    width: 300px;
+}
+
+.right-col{
+    width: 580px;
+}
+
+.form-switch .form-check-input{
+    width: 5em;
+    height: 1.7em;
+}
+
+.on-off-switch{
+    margin: 2em;
+    margin-left: 110px;
+}
+
+.on-off-switch label{
+    margin-top: 5px;
+    margin-left: 1.2em;
+}
+
+.select-server{
+    width: 80%;
+    margin-left: 35px;
+    margin-top: 50px;
+}
+
+main{
+    height: 515px;
+}
+
+.form-label{
+    width: 180px;
+}
+
+.form-range{
+    display: inline-block;
+    width: 50%;
+}
+
+.row > *, .row {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+}
