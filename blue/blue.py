@@ -9,13 +9,32 @@ import multiprocessing
 import psutil
 from multiprocessing import Process
 import math
+import time
+import signal
 
-eel.init('web')
+class Connections():
+    """
+    docstring
+    """
+    workerp = None
 
-test = 1
+def closeApp(relPath, socks):
+    print(relPath)
+    print(socks)
+    print("It works")
 
-def spawn(cpu, ram, server):
-    print("start of sub")
+    if len(socks) != 0:
+        return
+
+    if allCon.workerp is not None and psutil.pid_exists(allCon.workerp):
+        print(os.kill(allCon.workerp, signal.SIGTERM))
+
+    return 0
+
+@eel.expose
+def sendit(cpu, ram, server):
+    print("SEND IT")
+    print(cpu, ram, server)
 
     if(cpu.isdigit()):
         procs = math.ceil(int(cpu)/4)
@@ -28,28 +47,32 @@ def spawn(cpu, ram, server):
         # TODO return logic
         return 0
 
-    subprocess.run("dask-worker.exe --tls-ca-file certs/myCA.pem --tls-cert certs/worker.crt "+
-                   "--tls-key certs/worker.key --protocol tls --nprocs "+procs+" "+
-                   "--nthreads "+threads+" --memory-limit "+ram+"GB tls://"+server+":8786")
-    print("end of sub")
+    args = ["dask-worker.exe", "--tls-ca-file", "certs/myCA.pem", "--tls-cert", "certs/worker.crt", 
+            "--tls-key", "certs/worker.key", "--protocol", "tls", "--nprocs", procs, "--nthreads", 
+            threads, "--memory-limit", ram+"GB", "tls://"+server+":8786"]
+    allCon.workerp = subprocess.Popen(args).pid
+    print(allCon.workerp)
 
-@eel.expose
-def sendit(cpu, ram, server):
-    print("SEND IT")
-    print(cpu, ram, server)
-    p = Process(target=spawn, args=(cpu, ram, server), daemon=True)
-    p.run()
+    print("IT IS RUNNING")
     return 0
 
-eel.start_up(os.cpu_count(), round(((psutil.virtual_memory().total/1024)/1024)/1024))
+allCon = Connections()
 
-try:
-    eel.start('index.html', size=(1000, 600))
+def main():
+    eel.init('web')
 
-except EnvironmentError:
-    print("aaa")
-    # If Chrome isn't found, fallback to Microsoft Edge on Win10 or greater
-    if sys.platform in ['win32', 'win64'] and int(platform.release()) >= 10:
-        eel.start('index.html', mode='edge', size=(1000, 600))
-    else:
-        raise
+    eel.start_up(os.cpu_count(), round(((psutil.virtual_memory().total/1024)/1024)/1024))
+
+    try:
+        eel.start('index.html', size=(1000, 600), close_callback=closeApp)
+
+    except EnvironmentError:
+        print("aaa")
+        # If Chrome isn't found, fallback to Microsoft Edge on Win10 or greater
+        if sys.platform in ['win32', 'win64'] and int(platform.release()) >= 10:
+            eel.start('index.html', mode='edge', size=(1000, 600))
+        else:
+            raise
+
+if __name__ == "__main__":
+    main()
