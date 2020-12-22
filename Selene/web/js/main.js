@@ -43,5 +43,13 @@ function launch() {
 	ram = $('#ram-slider').val()
 	server = $('#server').val()
 	// console.log(cpu, ram, server);
-	eel.launch_worker(cpu, ram, server)
+
+	if($("#on-off").prop('checked') == true){
+		console.log("turned ON");
+		eel.launch_worker(cpu, ram, server)
+	}
+	else{
+		console.log("turned off");
+		eel.close_worker()
+	}
 }

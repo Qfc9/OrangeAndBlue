@@ -21,19 +21,17 @@ class Connections():
 def close_app(relPath, socks):
     print(relPath)
     print(socks)
-    print("It works")
+    print("Closing Selene...")
 
     if len(socks) != 0:
         return
 
-    if allCon.workerp is not None and psutil.pid_exists(allCon.workerp):
-        print(os.kill(allCon.workerp, signal.SIGTERM))
-    
+    close_worker()
     exit()
 
 @eel.expose
 def launch_worker(cpu, ram, server):
-    print("SEND IT")
+    print("Launching worker...")
     print(cpu, ram, server)
 
     if(cpu.isdigit()):
@@ -51,10 +49,21 @@ def launch_worker(cpu, ram, server):
             "--tls-key", "certs/worker.key", "--protocol", "tls", "--nprocs", procs, "--nthreads", 
             threads, "--memory-limit", ram+"GB", "tls://"+server+":8786"]
     allCon.workerp = subprocess.Popen(args).pid
-    print(allCon.workerp)
+    print("Worker's PID:", allCon.workerp)
 
-    print("IT IS RUNNING")
     return 0
+
+@eel.expose
+def close_worker():
+    print("Closing worker")
+
+    if allCon.workerp is not None and psutil.pid_exists(allCon.workerp):
+        os.kill(allCon.workerp, signal.SIGTERM)
+    else:
+        print("No worker to close")
+        return
+
+    print("Worker Closed")
 
 allCon = Connections()
 
@@ -67,10 +76,9 @@ def main():
         eel.start('index.html', size=(1000, 600), close_callback=close_app)
 
     except EnvironmentError:
-        print("aaa")
         # If Chrome isn't found, fallback to Microsoft Edge on Win10 or greater
         if sys.platform in ['win32', 'win64'] and int(platform.release()) >= 10:
-            eel.start('index.html', mode='edge', size=(1000, 600))
+            eel.start('index.html', mode='edge', size=(1000, 600), close_callback=close_app)
         else:
             raise
 
