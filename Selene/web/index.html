@@ -11,15 +11,6 @@
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <toast>
-        <div id="myToast" style="width: 100%;" class="toast d-flex align-items-center bg-warning border-0 text-center" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
-            <div  style="width: 100%;" class="toast-body text-center">
-                <span class="text-center">Closing this PAGE <u>will</u> stop the application!</span>
-            </div>
-            <button type="button" class="btn-close ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </toast>
-
     <main>
         <div class="row h-100">
 
@@ -38,15 +29,24 @@
             </div>
 
             <div class="col-sm-8 right-col">
+                <toast>
+                    <div id="myToast" style="width: 100%;" class="toast d-flex align-items-center bg-danger text-white border-0 text-center" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false">
+                        <div  style="width: 100%;" class="toast-body text-center">
+                            <span class="text-center">Closing this PAGE <u>will</u> stop the application!</span>
+                        </div>
+                        <button type="button" class="btn-close btn-close-white ms-auto me-2" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                </toast>
+                
                 <div class="row">
-                    <div class="col-sm pt-5 p-4">
+                    <div class="col-sm pt-5 p-4 ps-5">
                         <label id="cpu" for="customRange2" class="form-label fs-3"></label>
                         <input id="cpu-slider" type="range" class="form-range" min="1" max="5" value="1" oninput="cpu_slider(this.value)">
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-sm p-4">
+                    <div class="col-sm p-4 ps-5">
                         <label id="ram" for="customRange2" class="form-label fs-3"></label>
                         <input id="ram-slider" type="range" class="form-range" min="1" max="5" value="1" oninput="ram_slider(this.value)">
                     </div>

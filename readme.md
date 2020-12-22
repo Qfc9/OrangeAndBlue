@@ -2,8 +2,6 @@
 Python based botnet utilizing the power of dask!
 
 ### TODO
-- gracefully close dask-worker with off button
-- close dask-worker when app closed
 - on start up check and close dask-workers
 - auto updating
 - connect to server

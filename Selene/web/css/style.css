@@ -1,13 +1,42 @@
 @import 'css/bootstrap.min.css';
 
+/* get the required local files */
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+
+/* use the font */
+body {
+    font-family: sans-serif;
+    color: #4f4f4f
+}
+
+.toast{
+    box-shadow: none;
+}
+
 .title-blue{
-    color:#0d6efd;
+    color:#dc5c35;
+}
+
+.bg-danger{
+    background-color: #dc5c35 !important;
+}
+
+#on-off{
+    background-color: #dc5c35;
+    border-color: #dc5c35;
 }
 
 .left-col{
     background:#fbfbfb;
     height: 100%;
     width: 300px;
+}
+
+.form-select{
+    border: 1px solid #ffffff;
 }
 
 .right-col{
@@ -36,7 +65,7 @@
 }
 
 main{
-    height: 515px;
+    height: 510px;
 }
 
 .form-label{
@@ -53,4 +82,18 @@ main{
     padding-left: 0;
     margin-right: 0;
     margin-left: 0;
+}
+
+:root {
+    --bs-blue: #20c996;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    background: #20c996;
+}
+input[type=range]::-moz-range-thumb {
+    background: #20c996;
+}
+input[type=range]::-ms-thumb {
+    background: #20c996;
 }

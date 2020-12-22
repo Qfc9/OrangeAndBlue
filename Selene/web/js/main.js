@@ -47,9 +47,15 @@ function launch() {
 	if($("#on-off").prop('checked') == true){
 		console.log("turned ON");
 		eel.launch_worker(cpu, ram, server)
+		$(".title-blue").css("color", "#20c997");
+		$("#on-off").css("background-color", "#20c997");
+		$("#on-off").css("border-color", "#20c997");
 	}
 	else{
 		console.log("turned off");
 		eel.close_worker()
+		$(".title-blue").css("color", "#dc5c35");
+		$("#on-off").css("background-color", "#dc5c35");
+		$("#on-off").css("border-color", "#dc5c35");
 	}
 }
