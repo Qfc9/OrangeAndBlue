@@ -11,8 +11,26 @@ myToastEl.addEventListener('hidden.bs.toast', function () {
 cpu_slider(1);
 ram_slider(1);
 
+$("#update-btn").hide();
+$("#update-spinner").hide();
+
+$(document).ready(function () {
+
+    setInterval(function () {
+		$("#update-btn").show();
+		console.log("test");
+    }, 3000);
+
+});
+
 eel.expose(start_up)
 
+function update_app(){
+	$("#update-text").text("Updating...")
+	$("#update-spinner").show();
+	$("#update-btn").attr("disabled", true);
+	eel.update_app();
+}
 
 function start_up(cpu_count, ram_count){
 
@@ -59,3 +77,4 @@ function launch() {
 		$("#on-off").css("border-color", "#dc5c35");
 	}
 }
+

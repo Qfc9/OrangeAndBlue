@@ -24,6 +24,33 @@ body {
     background-color: #dc5c35 !important;
 }
 
+.mt-auto {
+    margin-top: auto!important;
+    text-align: center;
+}
+
+.btn-outline-primary {
+    color: #20c996;
+    border-color: #20c996 !important;
+}
+
+.btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show {
+    color: #fff;
+    background-color: #1ba078;
+    border-color: #1ba078;
+}
+
+.btn-check:checked + .btn-outline-primary, .btn-check:hover + .btn-outline-primary, .btn-outline-primary:hover, .btn-outline-primary.hover, .btn-outline-primary.dropdown-toggle.show {
+    color: #fff;
+    background-color: #20c996;
+    border-color: #20c996;
+}
+
+.btn-outline-primary:disabled, .btn-outline-primary.disabled {
+    color: #20c996;
+    background-color: transparent;
+}
+
 #on-off{
     background-color: #dc5c35;
     border-color: #dc5c35;

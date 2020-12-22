@@ -26,6 +26,13 @@
                 <select id="server" class="form-select select-server" aria-label="Default select example">
                     <option selected value="68.134.200.225">Test Botnet Server</option>
                 </select>
+
+                <footer class="mt-auto">
+                    <button id="update-btn" type="button" style="margin-top: 200px;" class="btn btn-outline-primary" onclick="update_app()">
+                        <span id="update-spinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span id="update-text" class="">Update</span>
+                    </button>
+                  </footer>
             </div>
 
             <div class="col-sm-8 right-col">

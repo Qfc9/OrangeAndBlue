@@ -30,6 +30,10 @@ def close_app(relPath, socks):
     exit()
 
 @eel.expose
+def update_app():
+    print("Update app")
+
+@eel.expose
 def launch_worker(cpu, ram, server):
     print("Launching worker...")
     print(cpu, ram, server)
