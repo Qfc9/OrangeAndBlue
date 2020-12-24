@@ -11,25 +11,62 @@ myToastEl.addEventListener('hidden.bs.toast', function () {
 cpu_slider(1);
 ram_slider(1);
 
+var config;
+var update_data;
+eel.py_get_config();
+
 $("#update-btn").hide();
 $("#update-spinner").hide();
 
 $(document).ready(function () {
 
     setInterval(function () {
-		$("#update-btn").show();
-		console.log("test");
+
+		$.getJSON( "https://eos.secretservice.app/update.php", function( data ) {
+			console.log(data);
+
+			console.log(config);
+
+			update_data = data;
+
+			if(data.version != config.version){
+				$("#update-btn").show();
+			}
+			else{
+				$("#update-btn").hide();
+			}
+
+		  });
     }, 3000);
 
 });
 
 eel.expose(start_up)
+eel.expose(js_get_config)
+eel.expose(finished_update)
+eel.expose(close_app)
+
+function js_get_config(conf){
+	console.log(conf);
+	config = jQuery.parseJSON( conf );
+}
+
+function close_app(){
+	window.close();
+}
 
 function update_app(){
 	$("#update-text").text("Updating...")
 	$("#update-spinner").show();
 	$("#update-btn").attr("disabled", true);
-	eel.update_app();
+	eel.update_app(update_data.link, update_data.restart);
+}
+
+function finished_update(){
+	$("#update-text").text("Update")
+	$("#update-spinner").hide();
+	$("#update-btn").attr("disabled", false);
+	$("#update-btn").hide();
 }
 
 function start_up(cpu_count, ram_count){
